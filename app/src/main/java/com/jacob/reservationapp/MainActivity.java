@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         reservationViewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
-        reservationViewModel.getAllReservations().observe(this, new Observer<List<Reservation>>() {
+        reservationViewModel.getReservationLiveData().observe(this, new Observer<List<Reservation>>() {
             @Override
             public void onChanged(List<Reservation> reservations) {
                 adapter.submitList(reservations);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                reservationViewModel.delete(adapter.getReservationAt(viewHolder.getAdapterPosition()));
+                //reservationViewModel.delete(adapter.getReservationAt(viewHolder.getAdapterPosition()));
 
                 Toast.makeText(MainActivity.this, "Reservation deleted", Toast.LENGTH_SHORT).show();
             }
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             String purpose = data.getStringExtra(AddEditReservationActivity.EXTRA_PURPOSE);
             long fromTime = data.getLongExtra(AddEditReservationActivity.EXTRA_FROMTIME, 1);
             long toTime = data.getLongExtra(AddEditReservationActivity.EXTRA_TOTIME, 1);
-            int userId = data.getIntExtra(AddEditReservationActivity.EXTRA_USERID, 1);
+            String userId = data.getStringExtra(AddEditReservationActivity.EXTRA_USERID);
 
             Reservation reservation = new Reservation(fromTime, toTime, userId, purpose, roomId);
             reservationViewModel.insert(reservation);
@@ -108,11 +108,11 @@ public class MainActivity extends AppCompatActivity {
             String purpose = data.getStringExtra(AddEditReservationActivity.EXTRA_PURPOSE);
             long fromTime = data.getLongExtra(AddEditReservationActivity.EXTRA_FROMTIME, 1);
             long toTime = data.getLongExtra(AddEditReservationActivity.EXTRA_TOTIME, 1);
-            int userId = data.getIntExtra(AddEditReservationActivity.EXTRA_USERID, 1);
+            String userId = data.getStringExtra(AddEditReservationActivity.EXTRA_USERID);
 
             Reservation reservation = new Reservation(fromTime, toTime, userId, purpose, roomId);
             reservation.setId(id);
-            reservationViewModel.update(reservation);
+            //reservationViewModel.update(reservation);
             Toast.makeText(this, "Reservation have been updated", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Reservation not saved", Toast.LENGTH_SHORT).show();
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.delete_all_reservations:
-                reservationViewModel.deleteAllReservations();
+                //reservationViewModel.deleteAllReservations();
                 Toast.makeText(this, "All reservations have been deleted", Toast.LENGTH_SHORT).show();
                 return true;
                 default:

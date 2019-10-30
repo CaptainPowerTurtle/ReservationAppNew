@@ -12,16 +12,16 @@ import java.util.List;
 @Dao
 public interface ReservationDao {
 
-    @Insert
-    void insert(Reservation reservation);
-    @Update
-    void update(Reservation reservation);
-    @Delete
-    void delete(Reservation reservation);
-
-    @Query("DELETE FROM reservation_table")
-    void deleteAllReservation();
-
-    @Query("SELECT * FROM reservation_table ORDER BY fromTime DESC")
-    LiveData<List<Reservation>> getAllReservations();
+//    @Insert
+//    void insert(Reservation reservation);
+//    @Update
+//    void update(Reservation reservation);
+//    @Delete
+//    void delete(Reservation reservation);
+//
+//    @Query("DELETE FROM reservation_table")
+//    void deleteAllReservation();
+//
+//    @Query("SELECT * FROM reservation_table ORDER BY fromTime DESC")
+//    LiveData<List<Reservation>> getAllReservations();
 }
